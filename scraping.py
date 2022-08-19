@@ -12,6 +12,7 @@ import datetime as dt
 from webdriver_manager.chrome import ChromeDriverManager
 
 
+
 def scrape_all(): 
     # Initiate headless driver for deployment
     executable_path = {'executable_path': ChromeDriverManager().install()}
@@ -36,7 +37,9 @@ def scrape_all():
 
 def mars_news(browser): 
 
-    url = "https://data-class-mars.s3.amazonaws.com/Mars/index.html"
+    # Scrape Mars News
+    # Visit the mars nasa news site
+    url = "https://redplanetscience.com"
     browser.visit(url)
 
     # Optional delay for loading the page
@@ -46,8 +49,8 @@ def mars_news(browser):
     html = browser.html 
     news_soup = soup(html, 'html.parser')
 
-    slide_elem = news_soup.select_one('div.list_text')
-    slide_elem.find("div", class_= 'content_title')
+    # slide_elem = news_soup.select_one('div.list_text')
+    # slide_elem.find("div", class_= 'content_title')
 
     # Add try/except for error handling 
     try: 
@@ -56,9 +59,6 @@ def mars_news(browser):
         news_title = slide_elem.find('div', class_ = 'content_title').get_text()
         # Use the parent element to find the paragraph text. 
         news_p = slide_elem.find('div', class_= 'article_teaser_body').get_text()
-  
-
-  
 
     except AttributeError: 
         return None, None
@@ -68,7 +68,7 @@ def mars_news(browser):
 def featured_image(browser):
 
     # Visit URL 
-    url = 'https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/index.html' 
+    url = 'https://spaceimages-mars.com' 
     browser.visit(url)
 
     # Find and click the full image button
@@ -90,7 +90,7 @@ def featured_image(browser):
 
 
     # Use the base url to create an absolute url 
-    img_url = f'https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/{img_url_rel}'
+    img_url = f'https://spaceimages-mars.com/{img_url_rel}'
 
 
     return img_url
@@ -101,7 +101,7 @@ def mars_facts():
 
     try:
         # use 'read_html' to scrape the facts table into a dataframe 
-        df = pd.read_html('https://data-class-mars-facts.s3.amazonaws.com/Mars_Facts/index.html')[0]
+        df = pd.read_html('https://galaxyfacts-mars.com')[0]
     except BaseException: 
         return None 
 
