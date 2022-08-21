@@ -20,7 +20,10 @@ def scrape():
     mars.update_one({}, {"$set": mars_data}, upsert = True)
     return redirect("/", code = 302)
 
+# @app.route("/scrape_hemispheres")
+# def scrape_hemispheres(): 
+
 
 if __name__ == "__main__":
-    print("This is false") 
-    app.run(debug = True)
+    # print("This is false") 
+    app.run(debug = False)
