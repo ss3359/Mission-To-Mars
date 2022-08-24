@@ -47,14 +47,17 @@
                 <div class = "col-md-4">
                     <div class = "row" id = "mars-facts">
                         <table class = "table table-bordered">
+                            <div class>
                         <h4>Mars Facts</h4>
-                        
+                        </div>
                         {{mars.facts | safe}}
                         </table>
                     </div>
 
                 </div>
+                <h1>Mars Hemisphere Images</h1>
 
+            </div>
                 {% for hemisphere in mars.hemispheres %}
         <div class="col-md-6">
           <div class="thumbnail">
@@ -65,9 +68,7 @@
           </div>
         </div>
         <div class="row">
-            <div class = "col-md-8">Mars Hemisphere Images</div>
-
-            </div>
+            
         {% endfor %}
                 <!-- {% for hemisphere in mars.hemispheres %}
                 <div>
